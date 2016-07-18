@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'game#index'
+  root 'games#index'
 
   resources :users
   resources :games
