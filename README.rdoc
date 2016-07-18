@@ -1,28 +1,6 @@
-== README
+== Rock Paper Scissors
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+This Rails 5 application will allow users to create
+a Rock Paper Scissors game. Others users will then be able to join and compete.
+When a round is finished, the results will be saved and posted to a scoreboard.
+The user's rating will then be updated to reflect the results. 
