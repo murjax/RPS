@@ -26,6 +26,7 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Home", :games %></li>
             <li><%= link_to "Login", :new_user_session %></li>
+            <li><%= link_to "Logout", :destroy_user_session, method: "delete" %></li>
           </ul>
         </div>
 	</div>
