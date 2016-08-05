@@ -9,5 +9,6 @@ App.games = App.cable.subscriptions.create("GamesChannel", {
 
   received: function(data) {
     // Called when there's incoming data on the websocket for this channel
+    $('#games').append(data)
   }
 });

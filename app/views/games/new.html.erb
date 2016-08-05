@@ -4,5 +4,16 @@
 </div>
 
 <div class="container">
-	
+	<%= form_for @game, remote: true do |form| %>
+		<%= form.text_field :player_one_id %>
+		<%= form.text_field :player_two_id %>
+		<%= form.text_field :winner_id %>
+		<%= form.submit 'Submit Choice' %>
+	<% end %>
+
+	<ul id="games">
+		<% @games.each do |game| %>
+			<%= render partial: 'game', object: game %>
+		<% end %>
+	</ul>
 </div>
