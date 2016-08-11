@@ -1,0 +1,13 @@
+<div class="container">
+	<%= form_for @game, remote: true do |form| %>
+		<%= form.nested_fields_for :choices, Choice.new do |choice| %>
+			<%= choice.text_field :user_id, value: current_user.id, style: 'display:none'  %>
+			<%= choice.text_field :choice %>
+		<% end %>
+		<%= form.submit 'Submit Choice' %>
+	<% end %>
+
+	<ul id="games">
+		<%= render partial: 'game', object: @game %>
+	</ul>
+</div>

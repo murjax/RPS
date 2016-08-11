@@ -1,19 +1,11 @@
 <div class="container intro">
 	<h1>Start a game!</h1>
-	<p>A new game will be started below. Enjoy</p>
+	<p>Click begin to start a new game. Enjoy</p>
 </div>
 
 <div class="container">
 	<%= form_for @game, remote: true do |form| %>
-		<%= form.text_field :player_one_id %>
-		<%= form.text_field :player_two_id %>
-		<%= form.text_field :winner_id %>
-		<%= form.submit 'Submit Choice' %>
+		<%= form.submit 'Begin' %>
 	<% end %>
-
-	<ul id="games">
-		<% @games.each do |game| %>
-			<%= render partial: 'game', object: game %>
-		<% end %>
-	</ul>
 </div>
+
