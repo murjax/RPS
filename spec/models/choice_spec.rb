@@ -2,25 +2,25 @@ require 'rails_helper'
 let(:choice) {Choice.new}
 describe "Choice" do 
 	describe "Choice should be either 'Rock', 'Paper', or 'Scissors'" do
-		scenario "Choice is Rock"
+		scenario "Choice is Rock" do 
 			choice.choice = "Rock"
 			choice.user_id = 1
 			expect(choice.save).to eq(true)
 		end
 
-		scenario "Choice is Paper"
+		scenario "Choice is Paper" do
 			choice.choice = "Paper"
 			choice.user_id = 1
 			expect(choice.save).to eq(true)
 		end
 
-		scenario "Choice is Scissors"
+		scenario "Choice is Scissors" do
 			choice.choice = "Scissors"
 			choice.user_id = 1
 			expect(choice.save).to eq(true)
 		end
 
-		scenario "Choice is Tree"
+		scenario "Choice is Tree" do
 			choice.choice = "Tree"
 			choice.user_id = 1
 			expect(choice.save).to eq(false)
