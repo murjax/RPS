@@ -28,8 +28,8 @@ class GamesController < ApplicationController
 		if @game.choices.count == 1
 			if @game.choices[0].user_id != current_user.id
 				@game.choices.create!(game_params[:choices_attributes]["0"])
+				@game.set_winner
 				ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
-
 			end
 		elsif @game.choices.count == 0
 			@game.choices.create!(game_params[:choices_attributes]["0"])
