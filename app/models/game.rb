@@ -21,4 +21,12 @@ class Game < ActiveRecord::Base
 		end
 
 	end
+
+	def set_player_one(id)
+		self.player_one_id = id
+	end
+
+	def set_player_two(id)
+		self.player_two_id = id
+	end
 end
