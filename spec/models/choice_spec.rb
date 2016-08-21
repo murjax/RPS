@@ -1,6 +1,6 @@
 require 'rails_helper'
-let(:choice) {Choice.new}
 describe "Choice" do 
+	let(:choice) {Choice.new}
 	describe "Choice should be either 'Rock', 'Paper', or 'Scissors'" do
 		scenario "Choice is Rock" do 
 			choice.choice = "Rock"
