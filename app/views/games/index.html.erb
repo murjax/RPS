@@ -6,8 +6,12 @@
 <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
-		<%= link_to "Login", :new_user_session, class: "btn btn-primary btn-block" %>
-		<%= link_to "Register", :new_user_registration, class: "btn btn-primary btn-block" %>
+		<% if current_user %>
+			<%= link_to "New Game", :new_game, class: "btn btn-primary btn-block" %>
+		<% else %>
+			<%= link_to "Login", :new_user_session, class: "btn btn-primary btn-block" %>
+			<%= link_to "Register", :new_user_registration, class: "btn btn-primary btn-block" %>
+		<% end %>
 	</div>
 	<div class="col-md-4"></div>
 </div>
