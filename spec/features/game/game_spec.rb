@@ -15,7 +15,7 @@ describe "Game Play" do
 		click_link("New Game")
 		click_button("Begin")
 
-		expect(page).to have_content "Submit Choice"
+		expect(page).to have_content "Choice"
 	end
 
 	scenario "Player 1 submits a choice" do
@@ -31,10 +31,15 @@ describe "Game Play" do
 
 
 		click_link("New Game")
-		click_link("Begin")
-
-		fill_in "Choice", with: "Rock"
-		click_link("Submit Choice")
+		click_button("Begin")
+		puts page.html
+		
+		fill_in "game_choices_attributes_0_choice", with: "Rock"
+		# all("input[name='game[choices_attributes][0][choice]']").each do |choice|
+		# 	choice.set("Rock")
+		# end
+		
+		click_button('Submit Choice')
 		expect(page).to have_content "Player #1 chose Rock"
 	end
 
