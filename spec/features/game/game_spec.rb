@@ -59,9 +59,10 @@ describe "Game Play" do
 	end
 
 	scenario "Player 2 submits a choice" do
-		user = create(:user)
-		game = create(:game)
+		user = create(:user_two)
+		game = create(:active_game)
 		visit root_path
+
 		within(".row") do
 			click_link("Login")
 		end
@@ -69,13 +70,12 @@ describe "Game Play" do
 		fill_in "Password", with: user.password
 		click_button "Log in"
 
+		click_link("#{game.id}")
+		fill_in "game_choices_attributes_0_choice", with: "Paper"
 
-		click_link("Join Existing Game")
-		click_link("Join")
-		fill_in "Choice", with: "Paper"
-		click_link("Submit Choice")
-		expect(page).to have_content "Player #1 chose Rock"
-		expect(page).to have_content "Player #2 chose Paper"
-		expect(page).to have_content "Player #2 won the game!"
+		click_button("Submit Choice")
+		expect(page).to have_content "Player # 1 chose Rock"
+		expect(page).to have_content "Player # 2 chose Paper"
+		expect(page).to have_content "Player # 2 won the game!"
 	end
 end
