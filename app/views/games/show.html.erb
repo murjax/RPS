@@ -4,5 +4,7 @@
 </div>
 
 <div class="container">
-	
+	<% @games.each do |game| %>
+		<li><%= link_to(game.id.to_s, edit_game_path(game.id)) %></li>
+	<% end %>
 </div>
