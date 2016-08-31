@@ -3,14 +3,9 @@ require "rails_helper"
 describe "Game Play" do
 	scenario "Player 1 enters the game" do
 		user = create(:user) 
-		visit root_path
 
-		within(".row") do
-			click_link("Login")
-		end
-		fill_in "Email", with: user.email
-		fill_in "Password", with: user.password
-		click_button "Log in"
+		sign_in user
+		visit root_path
 
 		click_link("New Game")
 		click_button("Begin")
@@ -20,15 +15,8 @@ describe "Game Play" do
 
 	scenario "Player 1 submits a choice" do
 		user = create(:user)
+		sign_in user
 		visit root_path
-
-		within(".row") do
-			click_link("Login")
-		end
-		fill_in "Email", with: user.email
-		fill_in "Password", with: user.password
-		click_button "Log in"
-
 
 		click_link("New Game")
 		click_button("Begin")
@@ -45,14 +33,8 @@ describe "Game Play" do
 	scenario "Player 2 enters the game" do 
 		user = create(:user_two)
 		game = create(:active_game)
+		sign_in user
 		visit root_path
-
-		within(".row") do
-			click_link("Login")
-		end
-		fill_in "Email", with: user.email
-		fill_in "Password", with: user.password
-		click_button "Log in"
 
 		click_link("#{game.id}")
 		expect(page).to have_content "Player # 1 chose Rock"
@@ -61,14 +43,9 @@ describe "Game Play" do
 	scenario "Player 2 submits a choice" do
 		user = create(:user_two)
 		game = create(:active_game)
-		visit root_path
 
-		within(".row") do
-			click_link("Login")
-		end
-		fill_in "Email", with: user.email
-		fill_in "Password", with: user.password
-		click_button "Log in"
+		sign_in user
+		visit root_path
 
 		click_link("#{game.id}")
 		fill_in "game_choices_attributes_0_choice", with: "Paper"
