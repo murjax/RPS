@@ -12,6 +12,16 @@ FactoryGirl.define do
 	  	player_one_id 1
 	  	player_two_id 2
   	end
+
+    factory :finished_game do
+      after(:create) do |game|
+        create(:rock, game: game)
+        create(:paper, game: game)
+      end
+
+      player_one_id 1
+      player_two_id 2
+    end
   	
   end
 end
