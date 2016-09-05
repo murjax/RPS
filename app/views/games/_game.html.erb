@@ -1,3 +1,11 @@
 <% if @game.choices.last %>
-	<li><%= "Player # #{@game.choices.last.user_id} chose #{@game.choices.last.choice}" %></li>
+	<% if @game.choices.last.user_id != current_user.id %>
+		<li><%= "Player # #{@game.choices.find_index(@game.choices.last) + 1} made a choice " %></li>
+	<% else %>
+		<li><%= "Player # #{@game.choices.find_index(@game.choices.last) + 1} chose #{@game.choices.last.choice}" %></li>
+	<% end %>
+<% end %>
+
+<% if @game.winner_id %>
+	<li><%= "Player # #{@game.choices.find_index(@game.choices.find{ |c| c.user_id == @game.winner_id }) + 1} has won the game!" %></li>
 <% end %>

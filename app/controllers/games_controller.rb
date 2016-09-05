@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 	def index
-		@games = Game.all
+		@games = Game.joins(:choices).group( 'games.id' ).having( 'count( game_id ) == 1' )
 	end
 	
 	def new
@@ -28,17 +28,23 @@ class GamesController < ApplicationController
 		
 		if @game.choices.count == 1
 			if @game.choices[0].user_id != current_user.id
-				@game.choices.create!(game_params[:choices_attributes]["0"])
-				@game.set_player_two(@game.choices[1].user_id)
-				@game.set_winner
+
+				if @game.choices.create(game_params[:choices_attributes]["0"])
+					@game.set_player_two(@game.choices[1].user_id)
+					@game.set_winner
+					@game.save
+					ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
+				end
+			end
+		elsif @game.choices.count == 0
+
+			if @game.choices.create(game_params[:choices_attributes]["0"])
+				@game.set_player_one(@game.choices[0].user_id)
 				@game.save
 				ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
 			end
-		elsif @game.choices.count == 0
-			@game.choices.create!(game_params[:choices_attributes]["0"])
-			@game.set_player_one(@game.choices[0].user_id)
-			@game.save
-			ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
+			
+			
 		end
 
 		

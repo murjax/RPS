@@ -3,7 +3,7 @@
 		<%= form.nested_fields_for :choices, Choice.new do |choice| %>
 			<%= choice.text_field :user_id, value: current_user.id, style: 'display:none'  %>
 			<%= choice.label :choice %><br />
-			<%= choice.text_field :choice %>
+			<%= choice.select :choice, options_for_select(["Rock", "Paper", "Scissors"]) %>
 		<% end %>
 		<%= form.submit 'Submit Choice' %>
 	<% end %>

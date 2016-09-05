@@ -1,6 +1,12 @@
 <div class="container intro">
 	<h1>Welcome to Rock Paper Scissors</h1>
-	<p>This application makes use of ActionCable to provide a two-player environment for playing this classic game. Please login or register below to get started.</p>
+	<p>This application makes use of ActionCable to provide a two-player environment for playing this classic game.</p>
+
+	<% if current_user %>
+		<p>Start a new game or join an existing game below</p>
+	<% else %> 
+		<p>Please login or register below to get started.</p>
+	<% end %>
 </div>
 
 <div class="row">
