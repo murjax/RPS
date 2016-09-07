@@ -1,14 +1,28 @@
 <div class="container">
-	<%= form_for @game, remote: true do |form| %>
-		<%= form.nested_fields_for :choices, Choice.new do |choice| %>
-			<%= choice.text_field :user_id, value: current_user.id, style: 'display:none'  %>
-			<%= choice.label :choice %><br />
-			<%= choice.select :choice, options_for_select(["Rock", "Paper", "Scissors"]) %>
-		<% end %>
-		<%= form.submit 'Submit Choice' %>
-	<% end %>
+	<div class="row">
+		<div class="col-md-4">
+			
+			<%= form_for @game, remote: true do |form| %>
+				<%= form.nested_fields_for :choices, Choice.new do |choice| %>
+					<%= choice.text_field :user_id, value: current_user.id, style: 'display:none'  %>
+					<div class="form-group">
+						<%= choice.label :choice %><br />
+						<%= choice.select :choice, options_for_select(["Rock", "Paper", "Scissors"]), {}, {class: "form-control"} %>
+					</div>
+				<% end %>
+				<%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
+			<% end %>
 
-	<ul id="games">
-		<%= render partial: 'game', object: @game %>
-	</ul>
+		</div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			
+			<ul id="games" class="list-group">
+				<%= render partial: 'game', object: @game %>
+			</ul>
+		</div>
+
+		
+	</div>
+	
 </div>

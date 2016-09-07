@@ -11,6 +11,13 @@ class GamesController < ApplicationController
 
 	def edit
 		@game = Game.find(params[:id])
+
+		if @game.choices.count == 1
+			if @game.choices[0].user_id == current_user.id
+				flash.now[:notice] = "You have already submitted your choice. Please wait for a second
+					player to make their choice."
+			end
+		end
 	end
 
 	def create
