@@ -10,7 +10,17 @@
 						<%= choice.select :choice, options_for_select(["Rock", "Paper", "Scissors"]), {}, {class: "form-control"} %>
 					</div>
 				<% end %>
-				<%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
+
+				<% if @game.choices[0] %>
+					<% if @game.choices[0].user_id == current_user.id %>
+						<%= form.submit 'Submit Choice', disabled: true, class: "btn btn-primary btn-block" %>
+					<% else %>
+						<%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
+					<% end %>
+				<% else %>
+
+					<%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
+				<% end %>
 			<% end %>
 
 		</div>

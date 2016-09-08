@@ -13,7 +13,7 @@
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
 		<% if current_user %>
-			<%= link_to "New Game", :new_game, class: "btn btn-primary btn-block" %>
+			<%= link_to "New Game", :games, method: "post", class: "btn btn-primary btn-block" %>
 		<% else %>
 			<%= link_to "Login", :new_user_session, class: "btn btn-primary btn-block" %>
 			<%= link_to "Register", :new_user_registration, class: "btn btn-primary btn-block" %>

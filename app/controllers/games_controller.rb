@@ -3,10 +3,10 @@ class GamesController < ApplicationController
 		@games = Game.joins(:choices).group( 'games.id' ).having( 'count( game_id ) == 1' )
 	end
 	
-	def new
-		@games = Game.all
-		@game = Game.new
-		@game.choices.build
+	def create
+
+		@game = Game.create!
+		redirect_to(:action => 'edit', id: @game.id)
 	end
 
 	def edit
@@ -18,14 +18,6 @@ class GamesController < ApplicationController
 					player to make their choice."
 			end
 		end
-	end
-
-	def create
-		logger.debug("create")
-
-		@game = Game.create!
-		logger.debug(@game)
-		redirect_to(:action => 'edit', id: @game.id)
 	end
 
 	def update
