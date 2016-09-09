@@ -1,11 +1,11 @@
 <% if @game.choices.last %>
 	<% if @game.choices.last.user_id != current_user.id %>
-		<li class="list-group-item"><%= "Player # #{@game.choices.find_index(@game.choices.last) + 1} made a choice " %></li>
+		<li class="list-group-item"><%= "#{User.find(@game.choices.last.user_id).username} made a choice " %></li>
 	<% else %>
-		<li class="list-group-item"><%= "Player # #{@game.choices.find_index(@game.choices.last) + 1} chose #{@game.choices.last.choice}" %></li>
+		<li class="list-group-item"><%= "#{User.find(@game.choices.last.user_id).username} chose #{@game.choices.last.choice}" %></li>
 	<% end %>
 <% end %>
 
 <% if @game.winner_id %>
-	<li class="list-group-item"><%= "Player # #{@game.choices.find_index(@game.choices.find{ |c| c.user_id == @game.winner_id }) + 1} has won the game!" %></li>
+	<li class="list-group-item"><%= "#{User.find(@game.winner_id).username} has won the game!" %></li>
 <% end %>
