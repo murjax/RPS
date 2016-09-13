@@ -8,8 +8,7 @@ describe "Game Play" do
 		visit root_path
 
 		click_link("New Game")
-		click_button("Begin")
-
+		visit edit_game_path(Game.last.id)
 		expect(page).to have_content "Choice"
 	end
 
@@ -19,8 +18,8 @@ describe "Game Play" do
 		visit root_path
 
 		click_link("New Game")
-		click_button("Begin")
 		
+		visit edit_game_path(Game.last.id)
 		select "Rock", from: "game_choices_attributes_0_choice"
 		
 		# all("input[name='game[choices_attributes][0][choice]']").each do |choice|
@@ -36,9 +35,8 @@ describe "Game Play" do
 		game = create(:active_game)
 		sign_in user
 		visit root_path
-
-		click_link("#{game.id}")
-		expect(page).to have_content "Player # 1 made a choice"
+		click_link("#{Game.last.id}")
+		expect(page).to have_content "made a choice"
 	end
 
 	scenario "Player 2 submits a choice" do

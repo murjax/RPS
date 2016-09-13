@@ -32,6 +32,9 @@ class GamesController < ApplicationController
 					@game.set_player_two(@game.choices[1].user_id)
 					@game.set_winner
 					@game.save
+					winner = User.find(@game.choices[1].user_id)
+					winner.increase_rating
+					winner.save
 					ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
 				end
 			end

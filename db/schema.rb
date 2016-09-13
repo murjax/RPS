@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805162627) do
+ActiveRecord::Schema.define(version: 20160913021346) do
 
   create_table "choices", force: :cascade do |t|
     t.integer  "game_id"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160805162627) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.integer  "rating"
+    t.integer  "rating",                 default: 0
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
