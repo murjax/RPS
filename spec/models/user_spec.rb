@@ -42,4 +42,11 @@ describe "User" do
 		expect(user.rating).to_not be_nil
 	end
 
+	scenario "Rating can be incremented with 'increase_rating' method " do
+		user = create(:user)
+		current_rating = user.rating
+		user.increase_rating
+		expect(user.rating).to eq(current_rating + 1)
+	end
+
 end
