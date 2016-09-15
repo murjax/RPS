@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160913021346) do
+ActiveRecord::Schema.define(version: 20160914211231) do
 
   create_table "choices", force: :cascade do |t|
     t.integer  "game_id"

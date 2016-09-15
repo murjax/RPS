@@ -6,6 +6,10 @@
 	<% end %>
 <% end %>
 
-<% if @game.winner_id %>
-	<li class="list-group-item"><%= "#{User.find(@game.winner_id).username} has won the game!" %></li>
+<% if @game.choices[1] %>
+	<% if @game.winner_id %>
+		<li class="list-group-item"><%= "#{User.find(@game.winner_id).username} has won the game!" %></li>
+	<% else %>
+		<li class="list-group-item"><%= "Nobody has won the game. Players made the same choice" %></li>
+	<% end %>
 <% end %>

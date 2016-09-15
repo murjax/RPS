@@ -18,6 +18,8 @@ class Game < ActiveRecord::Base
 			self.winner_id = self.choices[0].user_id
 		elsif choices[0] == "Paper" && choices[1] == "Scissors"
 			self.winner_id = self.choices[1].user_id
+		else 
+			self.winner_id = nil
 		end
 
 	end
