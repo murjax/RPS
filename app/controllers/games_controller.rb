@@ -23,16 +23,12 @@ class GamesController < ApplicationController
 	def update
 		@game = Game.find(params[:id])
 		
-		
-		
 		if @game.choices.count == 1
 			if @game.choices[0].user_id != current_user.id
 
 				if @game.choices.create(game_params[:choices_attributes]["0"])
-					@game.set_player_two(@game.choices[1].user_id)
 					@game.set_winner
 					@game.save
-
 
 					if @game.winner_id
 						winner = User.find(@game.winner_id)
@@ -46,7 +42,6 @@ class GamesController < ApplicationController
 		elsif @game.choices.count == 0
 
 			if @game.choices.create(game_params[:choices_attributes]["0"])
-				@game.set_player_one(@game.choices[0].user_id)
 				@game.save
 				ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
 			end

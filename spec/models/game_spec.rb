@@ -11,12 +11,6 @@ describe "Game" do
 		expect(finished_game).to_not be_valid
 	end
 
-	scenario "Game players have numerical IDs" do 
-		user = create(:user)
-		game.player_one_id = user.id
-		expect(game.player_one_id).to be_kind_of(Fixnum)
-	end
-
 	scenario "Game winner has numerical ID" do
 		user = create(:user)
 		game.winner_id = user.id

@@ -24,14 +24,6 @@ class Game < ActiveRecord::Base
 
 	end
 
-	def set_player_one(id)
-		self.player_one_id = id
-	end
-
-	def set_player_two(id)
-		self.player_two_id = id
-	end
-
 	def number_of_choices
 		if self.choices.size > 2
 			errors.add(:choices, "Invalid number of choices")
