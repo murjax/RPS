@@ -22,15 +22,18 @@
   <div class="col-md-4"></div>
 </div>
 
-<div class="container intro">
-  <h1>Join a game!</h1>
-  <p>Any user-created games will be shown below. Join one for a challenge!</p>
-</div>
 
-<div class="container">
-  <ul class="list-group">
-    <% @games.each do |game| %>
-      <li class="list-group-item"><%= link_to(game.id.to_s, edit_game_path(game.id), class: "btn btn-success btn-block") %></li>
-    <% end %>
-  </ul>
-</div>
+<% if current_user %>
+  <div class="container intro">
+    <h1>Join a game!</h1>
+    <p>Any user-created games will be shown below. Join one for a challenge!</p>
+  </div>
+
+  <div class="container">
+    <ul class="list-group">
+      <% @games.each do |game| %>
+        <li class="list-group-item"><%= link_to(game.id.to_s, edit_game_path(game.id), class: "btn btn-success btn-block") %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
