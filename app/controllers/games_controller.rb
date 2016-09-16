@@ -22,23 +22,26 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     
-    if @game.choices.count == 1
-      if @game.choices[0].user_id != current_user.id
+    if !@game.winner_id
+      if @game.choices.count == 1
+        if @game.choices[0].user_id != current_user.id
+
+          if @game.choices.create(game_params[:choices_attributes]["0"])
+            @game.set_winner
+            @game.save
+            
+            ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
+          end
+        end
+      elsif @game.choices.count == 0
 
         if @game.choices.create(game_params[:choices_attributes]["0"])
-          @game.set_winner
           @game.save
-          
           ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
-        end
+        end 
       end
-    elsif @game.choices.count == 0
-
-      if @game.choices.create(game_params[:choices_attributes]["0"])
-        @game.save
-        ActionCable.server.broadcast "games", render( partial: 'games/game', object: @game )
-      end 
     end
+
   end
 
   private

@@ -11,5 +11,6 @@ App.games = App.cable.subscriptions.create("GamesChannel", {
     // Called when there's incoming data on the websocket for this channel
     $('#games').append(data)
     $(".edit_game .btn").prop('disabled',true);
+    $('#games li:gt(2)').hide();
   }
 });
