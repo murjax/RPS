@@ -1,15 +1,15 @@
 <% if @game.choices.last %>
-	<% if @game.choices.last.user_id != current_user.id %>
-		<li class="list-group-item"><%= "#{User.find(@game.choices.last.user_id).username} made a choice " %></li>
-	<% else %>
-		<li class="list-group-item"><%= "#{User.find(@game.choices.last.user_id).username} chose #{@game.choices.last.choice}" %></li>
-	<% end %>
+  <% if @game.choices.last.user_id != current_user.id %>
+    <li class="list-group-item"><%= "#{User.find(@game.choices.last.user_id).username} made a choice " %></li>
+  <% else %>
+    <li class="list-group-item"><%= "#{User.find(@game.choices.last.user_id).username} chose #{@game.choices.last.choice}" %></li>
+  <% end %>
 <% end %>
 
 <% if @game.choices[1] %>
-	<% if @game.winner_id %>
-		<li class="list-group-item"><%= "#{User.find(@game.winner_id).username} has won the game!" %></li>
-	<% else %>
-		<li class="list-group-item"><%= "Nobody has won the game. Players made the same choice" %></li>
-	<% end %>
+  <% if @game.winner_id %>
+    <li class="list-group-item"><%= "#{User.find(@game.winner_id).username} has won the game!" %></li>
+  <% else %>
+    <li class="list-group-item"><%= "Nobody has won the game. Players made the same choice" %></li>
+  <% end %>
 <% end %>

@@ -1,38 +1,38 @@
 <div class="container">
-	<div class="row">
-		<div class="col-md-4">
-			
-			<%= form_for @game, remote: true do |form| %>
-				<%= form.nested_fields_for :choices, Choice.new do |choice| %>
-					<%= choice.text_field :user_id, value: current_user.id, style: 'display:none'  %>
-					<div class="form-group">
-						<%= choice.label :choice %><br />
-						<%= choice.select :choice, options_for_select(["Rock", "Paper", "Scissors"]), {}, {class: "form-control"} %>
-					</div>
-				<% end %>
+  <div class="row">
+    <div class="col-md-4">
+      
+      <%= form_for @game, remote: true do |form| %>
+        <%= form.nested_fields_for :choices, Choice.new do |choice| %>
+          <%= choice.text_field :user_id, value: current_user.id, style: 'display:none'  %>
+          <div class="form-group">
+            <%= choice.label :choice %><br />
+            <%= choice.select :choice, options_for_select(["Rock", "Paper", "Scissors"]), {}, {class: "form-control"} %>
+          </div>
+        <% end %>
 
-				<% if @game.choices[0] %>
-					<% if @game.choices[0].user_id == current_user.id %>
-						<%= form.submit 'Submit Choice', disabled: true, class: "btn btn-primary btn-block" %>
-					<% else %>
-						<%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
-					<% end %>
-				<% else %>
+        <% if @game.choices[0] %>
+          <% if @game.choices[0].user_id == current_user.id %>
+            <%= form.submit 'Submit Choice', disabled: true, class: "btn btn-primary btn-block" %>
+          <% else %>
+            <%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
+          <% end %>
+        <% else %>
 
-					<%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
-				<% end %>
-			<% end %>
+          <%= form.submit 'Submit Choice', class: "btn btn-primary btn-block" %>
+        <% end %>
+      <% end %>
 
-		</div>
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
-			
-			<ul id="games" class="list-group">
-				<%= render partial: 'game', object: @game %>
-			</ul>
-		</div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      
+      <ul id="games" class="list-group">
+        <%= render partial: 'game', object: @game %>
+      </ul>
+    </div>
 
-		
-	</div>
-	
+    
+  </div>
+  
 </div>

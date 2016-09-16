@@ -1,32 +1,38 @@
 class Game < ActiveRecord::Base
-	has_many :choices
-	accepts_nested_attributes_for :choices, allow_destroy: true
-	validate :number_of_choices
+  has_many :choices
+  accepts_nested_attributes_for :choices, allow_destroy: true
+  validate :number_of_choices
 
-	def set_winner
-		choices = self.choices.map{ |c| c.choice }
+  def set_winner
+    choices = self.choices.map{ |c| c.choice }
+    if !same?(choices)
+      winner_index = first_choice_wins?(choices) ? 0 : 1
+      self.winner_id = self.choices[winner_index].user_id
+      increase_winner_rating
+    end
+  end
 
-		if choices[0] == "Rock" && choices[1] == "Scissors"
-			self.winner_id = self.choices[0].user_id
-		elsif choices[0] == "Scissors" && choices[1] == "Rock"
-			self.winner_id = self.choices[1].user_id
-		elsif choices[0] == "Paper" && choices[1] == "Rock"
-			self.winner_id = self.choices[0].user_id
-		elsif choices[0] == "Rock" && choices[1] == "Paper"
-			self.winner_id = self.choices[1].user_id
-		elsif choices[0] == "Scissors" && choices[1] == "Paper"
-			self.winner_id = self.choices[0].user_id
-		elsif choices[0] == "Paper" && choices[1] == "Scissors"
-			self.winner_id = self.choices[1].user_id
-		else 
-			self.winner_id = nil
-		end
+  def number_of_choices
+    if self.choices.size > 2
+      errors.add(:choices, "Invalid number of choices")
+    end
+  end
 
-	end
+  private
 
-	def number_of_choices
-		if self.choices.size > 2
-			errors.add(:choices, "Invalid number of choices")
-		end
-	end
+  def first_choice_wins?(choices)
+    winning_options = {"Rock" => "Scissors", "Paper" => "Rock", "Scissors" => "Paper"}
+    winning_options[choices[0]] == choices[1] ? true : false
+  end
+
+  def same?(choices)
+    choices.uniq.length == 1 ? true : false
+  end
+
+  def increase_winner_rating
+    winner = User.find(self.winner_id)
+    winner.increase_rating
+    winner.save
+  end
+
 end
